@@ -17,6 +17,10 @@
   font-family: "Roboto", sans-serif;
 }
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   color: inherit;
+}
+.content{
+  min-height: calc(100vh - 243px);
+  padding-top: 48px;
 }
