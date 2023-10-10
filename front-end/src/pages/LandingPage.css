@@ -1,3 +1,67 @@
-.landing-page{
-  /* height: 200vh; */
+.section-1{
+  background: linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);
+  background-blend-mode: normal, normal;
+  color: rgb(255, 255, 255);
+  height: 650px;
+  padding-top: 53px;
+}
+.container-1{
+  max-width: 1140px;
+  display: flex;
+  margin: 0 auto;
+  height: 100%;
+  align-items: center;
+}
+.section-1 .title{
+  font-size: 48px;
+  margin-bottom: 0.5rem;
+}
+.section-1 .subtitle{
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+.section-2{
+  padding: 80px 0;
+  background-color: #e7feff;
+}
+.container-2{
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.section-2 .section-head{
+  width: 640px;
+  color: var(--text-black);
+  font-size: 16px;
+}
+.section-2 .title{
+  margin-bottom: 1.5rem;
+  font-size: 36px;
+}
+.section-2 .subtitle{
+  margin-bottom: 1.5rem;
+  font-size: 20px;
+  font-weight: 400;
+}
+.section-body{
+  display: flex;
+  flex-direction: row;
+  margin-top: 52px;
+  justify-content: space-between;
+}
+.section-body img{
+  width: 782px;
+}
+.section-body .left{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 305px;
+  color: var(--text-black);
+  padding-left: 28px;
+}
+.feature-card .title{
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
