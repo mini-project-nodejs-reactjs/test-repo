@@ -1,0 +1,50 @@
+body {
+  background-color: white;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+  font-size: 12px;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+
+}
+
+.google-button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.google-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.google-button-text {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.create-account {
+  text-decoration: none;
+  margin-top: 10px;
+  font-size: 15px;
+}
