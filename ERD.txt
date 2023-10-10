@@ -1,0 +1,40 @@
+Table users {
+  id integer [primary key]
+  email varchar
+  password varchar
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+Table userBoards {
+  id integer [primary key]
+  userId integer [ref: > users.id]
+  boardId integer [ref: > boards.id]
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+Table boards {
+  id integer [primary key]
+  boardName varchar
+  backgroundImg varchar
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+Table todos {
+  id integer [primary key]
+  todoName varchar
+  userId integer [ref: > users.id]
+  typeId integer [ref: > types.id]
+  boardId integer [ref: > boards.id]
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+Table types {
+  id integer [primary key]
+  typeName varchar
+  createdAt timestamp
+  updatedAt timestamp
+}
