@@ -47,7 +47,7 @@ const Login = () => {
             </button>
             <p className="mt-4">
               Don't have an account?
-              <Link to="/register" className="create-account">
+              <Link to="/register" className="account">
                 Create an account
               </Link>
             </p>

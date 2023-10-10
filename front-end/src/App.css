@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500&family=Poppins:wght@100;200;300&family=Roboto:wght@100;300;400&display=swap");
+@import url("./components//Navbar.css");
+@import url("./pages/LandingPage.css");
+
+:root {
+  --black-base: #22272b;
+  --text-white: #b6c2cf;
+  --light-border: hsla(211, 18%, 68%, 0.16);
+}
+
+* {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}

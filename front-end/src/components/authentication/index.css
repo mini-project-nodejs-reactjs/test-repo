@@ -25,7 +25,6 @@ h3 {
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease-in-out;
-
 }
 
 .google-button:hover {
@@ -43,7 +42,7 @@ h3 {
   text-align: center;
 }
 
-.create-account {
+.account {
   text-decoration: none;
   margin-top: 10px;
   font-size: 15px;

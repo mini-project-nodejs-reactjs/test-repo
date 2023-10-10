@@ -1,0 +1,22 @@
+.navbar{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 32px;
+  background-color: var(--black-base);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--light-border);
+  position: fixed;
+  top: 0px;
+  z-index: 100;
+}
+.icon-navbar{
+  width: 75px;
+  padding: 8px 0;
+}
+.button-link{
+  color: var(--text-white);
+}
