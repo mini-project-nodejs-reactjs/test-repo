@@ -1,7 +1,24 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link,  } from "react-router-dom";
+// import axios from "axios";
 
 const Register = () => {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+  // const navigate = useNavigate();
+
+  // const handleRegister = async () => {
+  //   try {
+  //     let result = await axios.postpost(
+  //       "http://localhost:3000/users/register",
+  //       form
+  //     );
+
+  //     navigate("/login");
+  //   } catch (error) {}
+  // };
   return (
     <div className="container">
       <div className="row">
@@ -20,6 +37,7 @@ const Register = () => {
                 type="email"
                 className="form-control"
                 placeholder="Enter your email"
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
             </div>
             <div className="form-group mb-3">
@@ -27,9 +45,13 @@ const Register = () => {
                 type="password"
                 className="form-control"
                 placeholder="Enter your password"
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </div>
-            <button type="submit" className="btn btn-primary w-100 mb-4">
+            <button
+              type="submit"
+              className="btn btn-primary w-100 mb-4"
+            >
               Continue
             </button>
             <h3 className="mb-3">OR</h3>
