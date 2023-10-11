@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="navbar">
+    <div className="_navbar">
       <div className="left">
         <Link to="/">
           <img
