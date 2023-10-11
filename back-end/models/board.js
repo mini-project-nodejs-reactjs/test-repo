@@ -9,13 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      board.hasMany(models.todo)
+      board.hasMany(models.todo);
     }
   }
   board.init(
     {
       boardName: DataTypes.STRING,
       backgroundImg: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,
