@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const Login = () => {
+const Login = (props) => {
+  const { loginCbHandler } = props;
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const loginUser = async () => {
+    try {
+      let response = await axios({
+        method: "POST",
+        url: "http://localhost:3000/users/login",
+        data: form,
+      });
+
+      console.log(response.data);
+
+      const access_token = response.data.access_token;
+      localStorage.setItem("access_token", access_token);
+
+      loginCbHandler(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const submitHandler = () => {
+    // console.log(form);
+    // handleLogin();
+    loginUser();
+  };
   return (
     <div className="container">
       <div className="row">
@@ -22,6 +53,7 @@ const Login = () => {
                 type="email"
                 className="form-control"
                 placeholder="Enter your email"
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
             </div>
             <div className="form-group mb-3">
@@ -29,9 +61,14 @@ const Login = () => {
                 type="password"
                 className="form-control"
                 placeholder="Enter your password"
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </div>
-            <button type="submit" className="btn btn-primary w-100 mb-4">
+            <button
+              type="submit"
+              className="btn btn-primary w-100 mb-4"
+              onClick={() => submitHandler()}
+            >
               Continue
             </button>
             <h3 className="mb-3">OR</h3>
