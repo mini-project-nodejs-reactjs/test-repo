@@ -1,7 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import SolidButton from "../components/SolidButton"
+import { useEffect } from "react"
+import { useSelector } from "react-redux"
 
 const LandingPage = () => {
+  const accessToken = useSelector(store => store.userReducer.accessToken)
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/boards')
+    }
+  }, [accessToken, navigate])
   return ( 
     <div className="landing-page">
       <div className="section-1">

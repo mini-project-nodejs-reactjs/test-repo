@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
+    "init-db": "sequelize db:create && sequelize db:migrate",
+    "seed-db": "sequelize db:seed:all",
+    "destroy-db": "sequelize db:drop",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

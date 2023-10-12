@@ -41,7 +41,10 @@ class UserController {
       if (emailFound) {
         if (decryptPwd(password, emailFound.password)) {
           let access_token = tokenGenerator(emailFound);
-          res.status(200).json({ access_token });
+          res.status(200).json({ access_token, userInfo: {
+            id: emailFound.id,
+            email: emailFound.email,
+          } });
 
           let verifyToken = tokenVerifier(access_token);
           console.log(verifyToken);

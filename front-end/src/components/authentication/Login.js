@@ -1,45 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { checkToken } from '../../store/actions';
 
-const Login = (props) => {
-  const { loginCbHandler } = props;
+const Login = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+  const [isError, setIsError] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const accessToken = useSelector(state => state.userReducer.accessToken)
 
-  const loginUser = async () => {
+  const loginUser = async (e) => {
+    e.preventDefault()
     try {
-      let response = await axios({
+      const { data } = await axios({
         method: "POST",
         url: "http://localhost:3000/users/login",
         data: form,
       });
 
-      console.log(response.data);
-
-      const access_token = response.data.access_token;
+      const access_token = data.access_token;
       localStorage.setItem("access_token", access_token);
+      dispatch(checkToken())
 
-      loginCbHandler(true);
+      navigate('/boards')
     } catch (error) {
-      console.log(error);
+      setIsError(error.response.data.message)
     }
   };
 
-  const submitHandler = () => {
-    // console.log(form);
-    // handleLogin();
-    loginUser();
-  };
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/boards')
+    }
+  }, [accessToken, navigate])
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 mx-auto text-center">
-          <form>
+          <form onSubmit={e => loginUser(e)}>
             <img
               src={
                 "https://logos-world.net/wp-content/uploads/2021/03/Trello-Logo.png"
@@ -48,6 +54,7 @@ const Login = (props) => {
               className="logo mb-4"
             />
             <h5 className="mb-3">Log in to continue</h5>
+            {isError && <p className="mt-4" style={{color: 'red'}}>{isError}</p>}
             <div className="form-group mb-3">
               <input
                 type="email"
@@ -67,7 +74,6 @@ const Login = (props) => {
             <button
               type="submit"
               className="btn btn-primary w-100 mb-4"
-              onClick={() => submitHandler()}
             >
               Continue
             </button>

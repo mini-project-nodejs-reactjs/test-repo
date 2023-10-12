@@ -1,44 +1,52 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { checkToken } from './store/actions';
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
+import LandingPage from "./pages/LandingPage";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
-import React, { useState, useEffect } from "react";
+import BoardList from "./pages/BoardList";
+
+const routes = [
+  {
+    path: '/',
+    element: <LandingPage />
+  },
+  {
+    path: '/login',
+    element: <Login />
+  },
+  {
+    path: '/register',
+    element: <Register />
+  },
+  {
+    path: '/boards',
+    element: <BoardList />
+  }
+]
 
 function App() {
-  const [loginStatus, setLoginStatus] = useState(false);
+  const dispatch = useDispatch()
 
-  const loginCbHandler = (result) => {
-    setLoginStatus(result);
-  };
   useEffect(() => {
-    if (localStorage.getItem("access_token")) {
-      setLoginStatus(true);
-    } else {
-      setLoginStatus(false);
-    }
-  }, [loginStatus]);
+    dispatch(checkToken())
+  }, [dispatch])
+
   return (
     <Router>
       <div className="App">
         <Navbar />
         <div className="content">
           <Routes>
-            <Route path="/" element={<LandingPage />} />
-            {/* <Route path="/login" element={<Login />} /> */}
-            <Route
-              path="/login"
-              element={
-                loginStatus ? (
-                  <LandingPage />
-                ) : (
-                  <Login loginCbHandler={loginCbHandler} />
-                )
-              }
-            />
-            <Route path="/register" element={<Register />} />
+            {routes.map((route, index) => {
+              return <Route key={index} {...route} />
+            })}
           </Routes>
         </div>
         <Footer />
