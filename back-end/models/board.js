@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       board.hasMany(models.todo);
+      board.belongsTo(models.user);
     }
   }
   board.init(
