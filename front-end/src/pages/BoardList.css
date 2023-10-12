@@ -1,0 +1,71 @@
+.board-list{
+  background-color: var(--black-base);
+  min-height: calc(100vh - 48px);
+}
+.board-list-container{
+  max-width: 1140px;
+  margin: 0 auto;
+  color: var(--text-white);
+  padding-top: 70px;
+}
+.board-list .title{
+  font-weight: 600;
+  margin: 0;
+  margin-right: 16px;
+}
+.board-list .page-header{
+  display: flex;
+  align-items: center;
+}
+.create-board-btn{
+  background-color: rgb(0, 101, 255);
+  border: none;
+  color: var(--text-white);
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.card-container{
+  padding-top: 52px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.board-card{
+  width: 300px;
+  height: 160px;
+  position: relative;
+  border-radius: 8px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+.board-card h5{
+  position: absolute;
+  width: 100%;
+  padding: 8px 0;
+  padding-left: 16px;
+  background-color: rgba(0,0,0, .5);
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.board-card img{
+  width: 300px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.create-modal .modal-content{
+  background-color: var(--black-base);
+  color: var(--text-white);
+}
+.create-board-input{
+  background-color: var(--black-base) !important;
+  color: var(--text-white) !important;
+}
+.create-board-input::placeholder{
+  color: var(--text-white) !important;
+}
+.create-board-label{
+  background-color: #444444 !important;
+  color: var(--text-white) !important;
+}

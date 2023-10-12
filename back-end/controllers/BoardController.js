@@ -1,10 +1,14 @@
-const { board, user } = require("../models");
+const { board } = require("../models");
+const { tokenVerifier } = require("../helpers/jsonwebtoken");
 
 class BoardController {
   static async getAllBoards(req, res) {
     try {
+      let userInfo = tokenVerifier(req.headers.access_token)
       let boards = await board.findAll({
-        include: [user],
+        where: {
+          userId: userInfo.id
+        }
       });
       res.status(200).json(boards);
     } catch (error) {
@@ -14,12 +18,13 @@ class BoardController {
 
   static async createBoard(req, res) {
     try {
-      const { boardName, backgroundImg, userId } = req.body;
+      let userInfo = tokenVerifier(req.headers.access_token)
+      const { boardName, backgroundImg } = req.body;
 
       let result = await board.create({
         boardName,
         backgroundImg,
-        userId,
+        userId: userInfo.id,
       });
 
       res.status(201).json(result);

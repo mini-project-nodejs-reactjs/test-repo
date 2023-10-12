@@ -3,6 +3,8 @@ import SolidButton from "../components/SolidButton"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 
+import Footer from "../components/Footer";
+
 const LandingPage = () => {
   const accessToken = useSelector(store => store.userReducer.accessToken)
   const navigate = useNavigate()
@@ -55,6 +57,7 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div> 
   )
 }
