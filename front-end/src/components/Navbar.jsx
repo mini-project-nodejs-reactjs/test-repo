@@ -1,6 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { removeToken } from '../store/actions';
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const accessToken = useSelector(state => state.userReducer.accessToken)
+
+  const logOut = () => {
+    dispatch(removeToken())
+    navigate('/')
+  }
+
+  let navButton
+  if (accessToken) {
+    navButton = <div className="button-link" onClick={() => logOut()}>Log Out</div>
+  } else {
+    navButton = <Link to="/login">
+      <div className="button-link">Log In</div>
+    </Link>
+  }
+
   return (
     <div className="_navbar">
       <div className="left">
@@ -13,9 +33,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="right">
-        <Link to="/login">
-          <div className="button-link">Log In</div>
-        </Link>
+        {navButton}
       </div>
     </div>
   );

@@ -1,29 +1,41 @@
-import React, { useState } from "react";
-import { Link,  } from "react-router-dom";
-// import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux"
 
 const Register = () => {
+  const accessToken = useSelector(store => store.userReducer.accessToken)
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const handleRegister = async () => {
-  //   try {
-  //     let result = await axios.postpost(
-  //       "http://localhost:3000/users/register",
-  //       form
-  //     );
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    try {
+      await axios.post(
+        "http://localhost:3000/users/register",
+        form
+      );
 
-  //     navigate("/login");
-  //   } catch (error) {}
-  // };
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/boards')
+    }
+  }, [accessToken, navigate])
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 mx-auto text-center">
-          <form>
+          <form onSubmit={e => handleRegister(e)}>
             <img
               src={
                 "https://logos-world.net/wp-content/uploads/2021/03/Trello-Logo.png"
