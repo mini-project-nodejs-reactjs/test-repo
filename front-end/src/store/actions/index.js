@@ -12,6 +12,7 @@ export const checkToken = () => {
 
 export const removeToken = () => {
   return (dispatch, getState) => {
+    localStorage.removeItem('access_token')
     dispatch({
       type: 'SET_ACCESSTOKEN',
       payload: {

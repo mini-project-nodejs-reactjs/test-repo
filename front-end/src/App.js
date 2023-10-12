@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { checkToken } from './store/actions';
 
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 
 import LandingPage from "./pages/LandingPage";
 import Login from "./components/authentication/Login";
@@ -49,7 +49,6 @@ function App() {
             })}
           </Routes>
         </div>
-        <Footer />
       </div>
     </Router>
   );
