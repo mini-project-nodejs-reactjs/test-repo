@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 const TodoList = () => {
   const [textCreateBacklog, setTextCreateBacklog] = useState('')
@@ -35,6 +38,12 @@ const TodoList = () => {
       todos: []
     },
   ])
+  const [showModal, setShowModal] = useState(false)
+  const [modalData, setModalData] = useState({
+    id: 0,
+    todoName: '',
+    typeId: ''
+  })
 
   const backlogEndRef = useRef(null)
   const developEndRef = useRef(null)
@@ -122,6 +131,44 @@ const TodoList = () => {
     }
   }
 
+  const deleteTodo = async (id) => {
+    try {
+      const config = {
+        method: 'delete',
+        url: `http://localhost:3000/todos/${id}`,
+        headers: {
+          access_token: accessToken
+        }
+      }
+      await axios(config)
+      setShowModal(false)
+      getTodos()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const updateTodo = async () => {
+    try {
+      const config = {
+        method: 'put',
+        url: `http://localhost:3000/todos/${modalData.id}`,
+        headers: {
+          access_token: accessToken
+        },
+        data: {
+          todoName: modalData.todoName,
+          typeId: Number(modalData.typeId)
+        }
+      }
+      await axios(config)
+      setShowModal(false)
+      getTodos()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const initTodos = (items) => {
     let backlog = {...types[0], todos: []}
     let development = {...types[1], todos: []}
@@ -172,6 +219,11 @@ const TodoList = () => {
     }, 500)
   }
 
+  const openEditModal = (todo) => {
+    setModalData(todo)
+    setShowModal(true)
+  }
+
   useEffect(() => {
     getTodos()
   }, [])
@@ -196,7 +248,7 @@ const TodoList = () => {
                     {
                       type.todos.map((todo, indexj) => {
                         return (
-                          <div className="type-todo" key={`${index}${indexj}`}>
+                          <div className="type-todo" key={`${index}${indexj}`} onClick={() => openEditModal(todo)} >
                             <p>{todo.todoName}</p>
                           </div>
                         )
@@ -220,6 +272,45 @@ const TodoList = () => {
           })
         }
       </div>
+
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        size="lg"
+        centered
+        className="create-modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Todo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <InputGroup className="mb-3">
+            <InputGroup.Text id="basic-addon1" style={{width: '160px'}} className="create-board-label">Todo Name</InputGroup.Text>
+            <Form.Control
+              placeholder="edit todo . . ."
+              aria-label="Project Name"
+              aria-describedby="basic-addon1"
+              className="create-board-input"
+              value={modalData.todoName}
+              onChange={e => setModalData({...modalData, todoName: e.target.value})}
+            />
+          </InputGroup>
+          <InputGroup className="mb-3">
+            <InputGroup.Text id="basic-addon1" style={{width: '160px'}} className="create-board-label">Move to</InputGroup.Text>
+            <Form.Select aria-label="Default select example" className="create-board-input" value={modalData.typeId} onChange={e => setModalData({...modalData, typeId: e.target.value})}>
+              {types.map((type, index) => {
+                return <option value={type.id} key={index}>{type.typeName}</option>
+              })}
+            </Form.Select>
+          </InputGroup>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={() => deleteTodo(modalData.id)}>Delete Todo</Button>
+          <Button variant="primary" onClick={() => updateTodo()}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
    );
 }
