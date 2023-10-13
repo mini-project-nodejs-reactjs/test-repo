@@ -11,6 +11,7 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import BoardList from "./pages/BoardList";
+import TodoList from "./pages/TodoList";
 
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
   {
     path: '/boards',
     element: <BoardList />
+  },
+  {
+    path: '/boards/:id',
+    element: <TodoList />
   }
 ]
 

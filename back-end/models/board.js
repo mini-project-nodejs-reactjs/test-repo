@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       hooks: {
         beforeCreate: function (board, options) {
           if (!board.backgroundImg) {
-            board.backgroundImg = 'https://9to5google.com/wp-content/uploads/sites/4/2017/02/chromeos_newdefaultwall_1-e1487111985183.png?w=1024'
+            board.backgroundImg = 'https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg?cs=srgb&dl=pexels-roberto-nickson-2486168.jpg&fm=jpg'
           }
         },
       },
