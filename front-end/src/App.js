@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { checkToken } from './store/actions';
+import { checkToken, checkUserInfo } from './store/actions';
 
 import Navbar from "./components/Navbar";
 // import Footer from "./components/Footer";
@@ -11,6 +11,7 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import BoardList from "./pages/BoardList";
+import TodoList from "./pages/TodoList";
 
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
   {
     path: '/boards',
     element: <BoardList />
+  },
+  {
+    path: '/boards/:id',
+    element: <TodoList />
   }
 ]
 
@@ -36,6 +41,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkToken())
+    dispatch(checkUserInfo())
   }, [dispatch])
 
   return (

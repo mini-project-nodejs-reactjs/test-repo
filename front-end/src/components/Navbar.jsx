@@ -1,11 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeToken } from '../store/actions';
+// import Dropdown from 'react-bootstrap/Dropdown';
+// import DropdownButton from 'react-bootstrap/DropdownButton';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const accessToken = useSelector(state => state.userReducer.accessToken)
+  const userInfo = useSelector(state => state.userReducer.userInfo)
 
   const logOut = () => {
     dispatch(removeToken())
@@ -14,7 +18,10 @@ const Navbar = () => {
 
   let navButton
   if (accessToken) {
-    navButton = <div className="button-link" onClick={() => logOut()}>Log Out</div>
+    // navButton = <div className="button-link" onClick={() => logOut()}>Log Out</div>
+    navButton = <NavDropdown id="nav-dropdown-dark" title={userInfo.email} menuVariant="dark">
+      <NavDropdown.Item onClick={() => logOut()}>Log Out</NavDropdown.Item>
+    </NavDropdown>
   } else {
     navButton = <Link to="/login">
       <div className="button-link">Log In</div>

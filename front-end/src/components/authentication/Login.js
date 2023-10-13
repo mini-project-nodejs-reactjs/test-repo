@@ -26,7 +26,14 @@ const Login = () => {
       });
 
       const access_token = data.access_token;
+      localStorage.setItem("user_info", JSON.stringify(data.userInfo));
       localStorage.setItem("access_token", access_token);
+      dispatch({
+        type: 'SET_USERINFO',
+        payload: {
+          userInfo: data.userInfo
+        }
+      })
       dispatch(checkToken())
 
       navigate('/boards')

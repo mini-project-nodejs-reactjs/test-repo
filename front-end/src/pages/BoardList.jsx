@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const BoardList = () => {
   const accessToken = useSelector(state => state.userReducer.accessToken)
@@ -32,21 +33,23 @@ const BoardList = () => {
   }
 
   const createBoard = async () => {
-    try {
-      const config = {
-        method: 'post',
-        url: 'http://localhost:3000/boards/',
-        headers: {
-          access_token: accessToken
-        },
-        data: newBoard
+    if (newBoard.boardName !== '') {
+      try {
+        const config = {
+          method: 'post',
+          url: 'http://localhost:3000/boards/',
+          headers: {
+            access_token: accessToken
+          },
+          data: newBoard
+        }
+        await axios(config)
+        setShowCreateModal(false)
+        fetchBoard()
+      } catch (error) {
+        console.log(error)
+        setShowCreateModal(false)
       }
-      await axios(config)
-      setShowCreateModal(false)
-      fetchBoard()
-    } catch (error) {
-      console.log(error)
-      setShowCreateModal(false)
     }
   }
 
@@ -74,10 +77,12 @@ const BoardList = () => {
           {boards.length === 0 && <p>You don't have any project.</p>}
           {boards.map((board, index) => {
             return( 
-              <div className="board-card" key={index}>
-                <h5>{board.boardName}</h5>
-                <img src={board.backgroundImg} alt="todo-apps" />
-              </div> 
+              <Link to={`/boards/${board.id}`} style={{ textDecoration: 'none', color: 'inherit' }} key={index}>
+                <div className="board-card">
+                  <h5>{board.boardName}</h5>
+                  <img src={board.backgroundImg} alt="todo-apps" />
+                </div> 
+              </Link>
           )})}
         </div>
       </div>

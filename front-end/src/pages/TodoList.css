@@ -1,0 +1,98 @@
+.todo-list{
+  background-color: var(--black-base);
+  height: calc(100vh - 48px);
+  width: 100vw;
+  position: relative;
+}
+.todo-list .background-todo-list{
+  position: absolute;
+  object-fit: cover;
+  height: calc(100vh - 48px);
+  width: 100vw;
+}
+.todo-list .glass-layer{
+  position: absolute;
+  height: calc(100vh - 48px);
+  width: 100vw;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, .4);
+}
+.todo-list .page-header{
+  z-index: 3;
+  position: absolute;
+  background-color: rgba(255, 255, 255, .2);
+  width: 100vw;
+  padding: 15px 30px;
+}
+.todo-list .page-header h4{
+  color: var(--text-black);
+  margin: 0;
+  font-weight: 600;
+  font-size: 18px;
+}
+.todo-list-container{
+  max-width: 1140px;
+  margin: 0 auto;
+  color: var(--text-white);
+  padding-top: 70px;
+  position: inherit;
+  z-index: 10;
+}
+.todo-list-container{
+  display: flex;
+  justify-content: space-between;
+}
+.type-card{
+  background-color: #101204;
+  width: 272px;
+  border-radius: 12px;
+  box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
+  height: fit-content;
+}
+.type-card .type-card-head{
+  padding: 12px 16px;
+}
+.type-card .type-card-head h5{
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+.type-todos{
+  padding: 0 10px;
+}
+.type-todos-container{
+  max-height: 612px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.type-todos-container::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+.type-todo{
+  border-radius: 8px;
+  background-color: #353b41;
+  box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
+  padding: 4px 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+.type-todo p{
+  font-size: 14px;
+  margin: 0;
+}
+.create-todo{
+  border-top: 1px solid #686868;
+  padding-top: 12px;
+  margin-bottom: 12px;
+}
+.input-create-todo{
+  border: none;
+  width: 100%;
+  background-color: #353b41;
+  border-radius: 8px;
+  color: var(--text-white);
+  padding: 4px 8px;
+  resize: none;
+  height: unset;
+}

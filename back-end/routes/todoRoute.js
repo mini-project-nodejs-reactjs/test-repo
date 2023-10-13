@@ -1,9 +1,9 @@
-// const todoRoute = require("express").Router();
-// const { todoController } = require("../controllers");
+const todoRoute = require("express").Router();
+const { todoController } = require("../controllers");
 
-// todoRoute.get("/", todoController.getAllTodos);
-// todoRoute.post("/", todoController.createTodo);
+todoRoute.get("/:boardId", todoController.getAllTodos);
+todoRoute.post("/", todoController.createTodo);
 // todoRoute.put("/:id", todoController.updateTodo);
 // todoRoute.delete("/:id", todoController.deleteTodo);
 
-// module.exports = todoRoute;
+module.exports = todoRoute;

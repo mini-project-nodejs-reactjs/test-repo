@@ -20,7 +20,7 @@ const LandingPage = () => {
           <div className="left">
             <h2 className="title">Trello brings all your tasks, teammates, and tools together</h2>
             <h5 className="subtitle">Keep everything in the same place—even if your team isn’t.</h5>
-            <Link to="/">
+            <Link to="/register">
               <SolidButton text="Sign up - it's free!" />
             </Link>
           </div>
