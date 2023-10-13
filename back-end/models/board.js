@@ -20,6 +20,13 @@ module.exports = (sequelize, DataTypes) => {
       userId: DataTypes.INTEGER,
     },
     {
+      hooks: {
+        beforeCreate: function (board, options) {
+          if (!board.backgroundImg) {
+            board.backgroundImg = 'https://9to5google.com/wp-content/uploads/sites/4/2017/02/chromeos_newdefaultwall_1-e1487111985183.png?w=1024'
+          }
+        },
+      },
       sequelize,
       modelName: "board",
     }

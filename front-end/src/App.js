@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { checkToken } from './store/actions';
+import { checkToken, checkUserInfo } from './store/actions';
 
 import Navbar from "./components/Navbar";
 // import Footer from "./components/Footer";
@@ -36,6 +36,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkToken())
+    dispatch(checkUserInfo())
   }, [dispatch])
 
   return (

@@ -32,21 +32,23 @@ const BoardList = () => {
   }
 
   const createBoard = async () => {
-    try {
-      const config = {
-        method: 'post',
-        url: 'http://localhost:3000/boards/',
-        headers: {
-          access_token: accessToken
-        },
-        data: newBoard
+    if (newBoard.boardName !== '') {
+      try {
+        const config = {
+          method: 'post',
+          url: 'http://localhost:3000/boards/',
+          headers: {
+            access_token: accessToken
+          },
+          data: newBoard
+        }
+        await axios(config)
+        setShowCreateModal(false)
+        fetchBoard()
+      } catch (error) {
+        console.log(error)
+        setShowCreateModal(false)
       }
-      await axios(config)
-      setShowCreateModal(false)
-      fetchBoard()
-    } catch (error) {
-      console.log(error)
-      setShowCreateModal(false)
     }
   }
 

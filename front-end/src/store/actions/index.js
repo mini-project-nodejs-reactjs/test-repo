@@ -21,3 +21,15 @@ export const removeToken = () => {
     })
   }
 }
+
+export const checkUserInfo = () => {
+  return (dispatch, getState) => {
+    const userInfo = localStorage.getItem('user_info')
+    dispatch({
+      type: 'SET_USERINFO',
+      payload: {
+        userInfo: JSON.parse(userInfo)
+      }
+    })
+  }
+}
