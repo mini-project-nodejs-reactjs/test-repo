@@ -6,18 +6,11 @@ Table users {
   updatedAt timestamp
 }
 
-Table userBoards {
-  id integer [primary key]
-  userId integer [ref: > users.id]
-  boardId integer [ref: > boards.id]
-  createdAt timestamp
-  updatedAt timestamp
-}
-
 Table boards {
   id integer [primary key]
   boardName varchar
   backgroundImg varchar
+  userId integer [ref: > users.id]
   createdAt timestamp
   updatedAt timestamp
 }
