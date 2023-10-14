@@ -4,20 +4,20 @@ import "./index.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { checkToken } from '../../store/actions';
+import { checkToken } from "../../store/actions";
 
 const Login = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const [isError, setIsError] = useState('')
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const accessToken = useSelector(state => state.userReducer.accessToken)
+  const [isError, setIsError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const accessToken = useSelector((state) => state.userReducer.accessToken);
 
   const loginUser = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const { data } = await axios({
         method: "POST",
@@ -29,30 +29,37 @@ const Login = () => {
       localStorage.setItem("user_info", JSON.stringify(data.userInfo));
       localStorage.setItem("access_token", access_token);
       dispatch({
-        type: 'SET_USERINFO',
+        type: "SET_USERINFO",
         payload: {
-          userInfo: data.userInfo
-        }
-      })
-      dispatch(checkToken())
+          userInfo: data.userInfo,
+        },
+      });
+      dispatch(checkToken());
 
-      navigate('/boards')
+      navigate("/boards");
     } catch (error) {
-      setIsError(error.response.data.message)
+      setIsError(error.response.data.message);
     }
   };
 
   useEffect(() => {
     if (accessToken) {
-      navigate('/boards')
+      navigate("/boards");
     }
-  }, [accessToken, navigate])
+  }, [accessToken, navigate]);
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 mx-auto text-center">
-          <form onSubmit={e => loginUser(e)}>
+          <div className="left-image">
+            <img
+              src="https://img.freepik.com/free-vector/tiny-people-developers-laptop-customer-requirements-software-requirement-description-user-case-agile-tool-business-analysis-concept-bright-vibrant-violet-isolated-illustration_335657-1012.jpg?size=626&ext=jpg&ga=GA1.2.341454807.1671117297&semt=ais"
+              alt=""
+              className="image"
+            />
+          </div>
+          <form onSubmit={(e) => loginUser(e)}>
             <img
               src={
                 "https://logos-world.net/wp-content/uploads/2021/03/Trello-Logo.png"
@@ -61,7 +68,11 @@ const Login = () => {
               className="logo mb-4"
             />
             <h5 className="mb-3">Log in to continue</h5>
-            {isError && <p className="mt-4" style={{color: 'red'}}>{isError}</p>}
+            {isError && (
+              <p className="mt-4" style={{ color: "red" }}>
+                {isError}
+              </p>
+            )}
             <div className="form-group mb-3">
               <input
                 type="email"
@@ -78,10 +89,7 @@ const Login = () => {
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </div>
-            <button
-              type="submit"
-              className="btn btn-primary w-100 mb-4"
-            >
+            <button type="submit" className="btn btn-primary w-100 mb-4">
               Continue
             </button>
             <h3 className="mb-3">OR</h3>
@@ -96,12 +104,19 @@ const Login = () => {
               <span className="google-button-text">Continue with Google</span>
             </button>
             <p className="mt-4">
-              Don't have an account?
+              Don't have an account?{" "}
               <Link to="/register" className="account">
                 Create an account
               </Link>
             </p>
           </form>
+          <div className="right-image">
+            <img
+              src="https://img.freepik.com/free-vector/hand-drawn-business-planning-illustration_23-2149164340.jpg?size=626&ext=jpg&ga=GA1.1.341454807.1671117297&semt=ais"
+              alt=""
+              className="image"
+            />
+          </div>
         </div>
       </div>
     </div>

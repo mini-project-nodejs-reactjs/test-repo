@@ -1,27 +1,38 @@
-.footer{
-  background-color: #172B4D;
+.footer {
+  background-color: #172b4d;
   color: white;
 }
-.footer .container{
+.footer .container {
   max-width: 1140px;
   margin: 0 auto;
 }
-.footer .upper-section{
+.footer .upper-section {
   display: flex;
   justify-content: space-between;
   padding-top: 40px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #FFF;
+  border-bottom: 1px solid #fff;
 }
-.footer-logo{
+.footer-logo {
   height: 40px;
 }
-.footer-card{
+.footer-card {
   width: 197px;
 }
-.footer-card h5{
+.footer-card h5 {
   margin-bottom: 8px;
 }
-.footer .lower-section{
+.footer .lower-section {
   height: 62px;
+}
+
+.social-logo {
+  margin-top: 10px;
+  width: 20px;
+  height: auto;
+}
+
+.right{
+  float: right;
+  margin-left: 20px; 
 }

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 
 const Register = () => {
-  const accessToken = useSelector(store => store.userReducer.accessToken)
+  const accessToken = useSelector((store) => store.userReducer.accessToken);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -12,12 +12,9 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await axios.post(
-        "http://localhost:3000/users/register",
-        form
-      );
+      await axios.post("http://localhost:3000/users/register", form);
 
       navigate("/login");
     } catch (error) {
@@ -27,15 +24,22 @@ const Register = () => {
 
   useEffect(() => {
     if (accessToken) {
-      navigate('/boards')
+      navigate("/boards");
     }
-  }, [accessToken, navigate])
+  }, [accessToken, navigate]);
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 mx-auto text-center">
-          <form onSubmit={e => handleRegister(e)}>
+          <div className="left-image">
+            <img
+              src="https://img.freepik.com/free-vector/tiny-people-developers-laptop-customer-requirements-software-requirement-description-user-case-agile-tool-business-analysis-concept-bright-vibrant-violet-isolated-illustration_335657-1012.jpg?size=626&ext=jpg&ga=GA1.2.341454807.1671117297&semt=ais"
+              alt=""
+              className="image"
+            />
+          </div>
+          <form onSubmit={(e) => handleRegister(e)}>
             <img
               src={
                 "https://logos-world.net/wp-content/uploads/2021/03/Trello-Logo.png"
@@ -60,10 +64,7 @@ const Register = () => {
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </div>
-            <button
-              type="submit"
-              className="btn btn-primary w-100 mb-4"
-            >
+            <button type="submit" className="btn btn-primary w-100 mb-4">
               Continue
             </button>
             <h3 className="mb-3">OR</h3>
@@ -78,12 +79,19 @@ const Register = () => {
               <span className="google-button-text">Continue with Google</span>
             </button>
             <p className="mt-4">
-              Do you already have an account?
+              Do you already have an account?{" "}
               <Link to="/login" className="account">
                 Log In
               </Link>
             </p>
           </form>
+          <div className="right-image">
+            <img
+              src="https://img.freepik.com/free-vector/hand-drawn-business-planning-illustration_23-2149164340.jpg?size=626&ext=jpg&ga=GA1.1.341454807.1671117297&semt=ais"
+              alt=""
+              className="image"
+            />
+          </div>
         </div>
       </div>
     </div>
