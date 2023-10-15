@@ -1,0 +1,406 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Todo App",
+    "description": "Documentation for Todo App API",
+    "version": "0.1.9"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "localhost"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "access_token": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get All Users",
+        "responses": {
+          "200": {
+            "description": "Done ga bang? Done"
+          }
+        }
+      }
+    },
+    "/users/register": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Register User",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "required": ["true"]
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": ["true"]
+                  }
+                }
+              },
+              "example": {
+                "email": "james@gmail.com",
+                "password": "james123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Register Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": 1,
+                  "email": "james@gmail.com",
+                  "password": "$2b$05$O/OYGAG4XaatC54Y.VV2C.3BFAu1FvvC/3dA3IOHrl.y6O9Sb9ane",
+                  "updatedAt": "2023-10-15T10:02:48.454Z",
+                  "createdAt": "2023-10-15T10:02:48.454Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Login User",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "required": ["true"]
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": ["true"]
+                  }
+                }
+              },
+              "example": {
+                "email": "james@gmail.com",
+                "password": "james123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "access_token": {
+                          "type": "string",
+                          "format": "jwt"
+                        },
+                        "refresh_token": {
+                          "type": "string",
+                          "format": "jwt"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsInJvbGUiOjB9.7W8I-3lyZ1X_a27VBNWHSH5yULLrf_GC8vRd2dyMOsg",
+                  "userInfo": {
+                    "id": 1,
+                    "email": "james@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}/update": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update User",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "string"
+                },
+                "password": {
+                  "example": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Update done ga bang? Done"
+          }
+        }
+      }
+    },
+    "/users/{id}/delete": {
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete User",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete done ga bang? Done"
+          }
+        }
+      }
+    },
+    "/boards": {
+      "get": {
+        "tags": ["Boards"],
+        "summary": "Get All Boards",
+        "security": [
+          {
+            "access_token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success get boards",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 1,
+                  "boardName": "BoardNew",
+                  "backgroundImg": "https://images.pexels.com/photos/2486168/pexels-photo-2486168.jpeg?cs=srgb&dl=pexels-roberto-nickson-2486168.jpg&fm=jpg",
+                  "userId": 2,
+                  "createdAt": "2023-10-15T01:31:44.445Z",
+                  "updatedAt": "2023-10-15T01:31:44.445Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/boards/add": {
+      "post": {
+        "security": [
+          {
+            "access_token": []
+          }
+        ],
+        "tags": ["Boards"],
+        "summary": "Add Board",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "boardName": {
+                    "type": "string"
+                  },
+                  "backgroundImg": {
+                    "type": "string"
+                  }
+                },
+                "required": ["boardName"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todos/:boardId": {
+      "get": {
+        "tags": ["Todos"],
+        "summary": "Get All Todos",
+        "security": [
+          {
+            "access_token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todos": {
+      "post": {
+        "security": [
+          {
+            "access_token": []
+          }
+        ],
+        "tags": ["Todos"],
+        "summary": "Create Todo",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "todoName": {
+                    "type": "string"
+                  },
+                  "typeId": {
+                    "type": "integer"
+                  },
+                  "boardId": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todos/{id}": {
+      "put": {
+        "tags": ["Todos"],
+        "summary": "Update Todo",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "todoName": {
+                  "example": "string"
+                },
+                "typeId": {
+                  "example": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Update done ga bang? Done"
+          }
+        }
+      }
+    },
+    "/todos/{id}/delete": {
+      "delete": {
+        "tags": ["Todos"],
+        "summary": "Delete Todo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete done ga bang? Done"
+          }
+        }
+      }
+    }
+  }
+}

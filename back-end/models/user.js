@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      user.hasMany(models.todo)
-      user.hasMany(models.board)
+      user.hasMany(models.todo);
+      user.hasMany(models.board);
     }
   }
   user.init(
@@ -31,12 +31,22 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      password: DataTypes.STRING,
+      password: {
+        type: DataTypes.STRING,
+        set(value) {
+          this.setDataValue("password", encryptPwd(value));
+        },
+      },
     },
     {
       hooks: {
         beforeCreate: function (user, options) {
           user.password = encryptPwd(user.password);
+        },
+        beforeUpdate: function (user, options) {
+          if (user.changed("password")) {
+            user.password = encryptPwd(user.password);
+          }
         },
       },
       sequelize,
