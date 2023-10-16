@@ -51,7 +51,7 @@ const Login = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-6 mx-auto text-center">
+        <div className="col-md-6 mx-auto text-center" style={{ marginTop: '80px' }}>
           <div className="left-image">
             <img
               src="https://img.freepik.com/free-vector/tiny-people-developers-laptop-customer-requirements-software-requirement-description-user-case-agile-tool-business-analysis-concept-bright-vibrant-violet-isolated-illustration_335657-1012.jpg?size=626&ext=jpg&ga=GA1.2.341454807.1671117297&semt=ais"
@@ -92,7 +92,7 @@ const Login = () => {
             <button type="submit" className="btn btn-primary w-100 mb-4">
               Continue
             </button>
-            <h3 className="mb-3">OR</h3>
+            {/* <h3 className="mb-3">OR</h3>
             <button className="btn btn-light w-100 google-button">
               <img
                 src={
@@ -102,7 +102,7 @@ const Login = () => {
                 className="google-logo"
               />
               <span className="google-button-text">Continue with Google</span>
-            </button>
+            </button> */}
             <p className="mt-4">
               Don't have an account?{" "}
               <Link to="/register" className="account">

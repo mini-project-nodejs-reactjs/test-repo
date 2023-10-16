@@ -33,9 +33,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       password: {
         type: DataTypes.STRING,
-        set(value) {
-          this.setDataValue("password", encryptPwd(value));
-        },
+        allowNull: false,
+        // set(value) {
+        //   this.setDataValue("password", encryptPwd(value));
+        // },
       },
     },
     {
